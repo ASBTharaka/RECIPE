@@ -1,0 +1,82 @@
+.list-table-format {
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 15px;
+  border: 1px solid #cacaca;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 15px;
+  transition: all 0.3s ease;
+  background-color: #fff;
+  margin-bottom: 10px;
+}
+
+.list-add {
+  margin-left: 50px;
+}
+
+.list-table-format.title {
+  background-color: #f9f9f9;
+  font-weight: bold;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.list-table-format img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.list-table-format img:hover {
+  transform: scale(1.1);
+}
+
+.list-table-format p, .list-table-format b {
+  margin: 0;
+  padding: 0 5px;
+}
+
+@media (max-width: 600px) {
+  .list-table-format {
+    grid-template-columns: 1fr 3fr 1fr;
+    gap: 15px;
+    padding: 8px 10px;
+  }
+
+  .list-table-format.title {
+    display: none;
+  }
+}
+
+/* Additional styling for better visual separation and interaction */
+.list-table-format div {
+  padding: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.list-table-format div:hover {
+  background-color: #f1f1f1;
+}
+
+.list-table-format div:nth-child(odd) {
+  background-color: #fdfdfd;
+}
+
+.list-table-format div:nth-child(even) {
+  background-color: #fbfbfb;
+}
+
+/* Adding styles for the delete action */
+.list-table-format .cursor {
+  color: #ff4d4d;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.list-table-format .cursor:hover {
+  color: #cc0000;
+}
