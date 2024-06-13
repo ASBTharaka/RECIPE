@@ -3,7 +3,7 @@ import "./Place_Order.css";
 import { StoreContext } from "../../context/storecontex";
 import axios from "axios";
 
-const Place_Order = () => {
+const PlaceOrder = () => {
 
     const{getTotalCartAmount,token,food_list,cartItems,url}=useContext(StoreContext)
 
@@ -24,6 +24,8 @@ const Place_Order = () => {
           const value=event.target.value;
           setData(data=>({...data,[name]:value}))
         }
+
+         
    const placeOrder =async(event)=>{
         event.preventDefault();
         let orderItems=[];
@@ -34,6 +36,8 @@ const Place_Order = () => {
                   orderItems.push(itemInfo);
             }
         })
+        
+
         let orderData={
           address:data,
           items:orderItems,
@@ -104,4 +108,4 @@ const Place_Order = () => {
   );
 };
 
-export default Place_Order;
+export default PlaceOrder;

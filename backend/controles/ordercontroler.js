@@ -22,7 +22,7 @@ const stripe =new Stripe(process.env.STRIPE_SECRET_KEY)
           await newOrder.save();
           await userModel.findByIdAndUpdate(req.body.userId,{cartData:{}});
 
-          const line_items = req.body.items.map(item => ({
+          const line_items = req.body.items.map((item) => ({
             price_data: {
                 currency: "aud",
                 product_data: {
@@ -38,7 +38,7 @@ const stripe =new Stripe(process.env.STRIPE_SECRET_KEY)
             product_data:{
               name:"Delivery Charges"
             },
-            unit_amount:2*100*80
+            unit_amount:2*100
           },
           quantity:1
         })
@@ -46,8 +46,8 @@ const stripe =new Stripe(process.env.STRIPE_SECRET_KEY)
         const session=await stripe.checkout.sessions.create({
            line_items:line_items,
            mode:'payment',
-           success_url:`${frontend_url}/verify?success=true&order_Id=${newOrder._id}`,
-           cancel_url: `${frontend_url}/verify?success=false&order_Id=${newOrder._id}`
+           success_url:`${frontend_url}/verify?success=true&orderId=${newOrder._id}`,
+           cancel_url: `${frontend_url}/verify?success=false&orderId=${newOrder._id}`
         })
 
 
@@ -59,7 +59,7 @@ const stripe =new Stripe(process.env.STRIPE_SECRET_KEY)
           res.json({success:false,message:"error"})
         }
    }
-   const verifyorder=async(req,res)=>{
+   const verifyOrder=async(req,res)=>{
    const{orderId,success}=req.body;
    try {
        if(success=="true"){
@@ -78,4 +78,4 @@ const stripe =new Stripe(process.env.STRIPE_SECRET_KEY)
    }
    }
 
-   export{placeOrder,verifyorder};
+   export{placeOrder,verifyOrder};
