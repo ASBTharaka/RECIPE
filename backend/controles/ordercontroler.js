@@ -1,3 +1,4 @@
+import { response } from "express";
 import orderModel from "../moddels/ordermoddle.js";
 import userModel from "../moddels/usermoddle.js";
 import Stripe from "stripe"
@@ -94,7 +95,25 @@ const stripe =new Stripe(process.env.STRIPE_SECRET_KEY)
    //listing oder for addmin panal
 
    const listOders=async(req,res)=>{
-
+         try {
+          const orders=await orderModel.find({});
+          res.json({success:true,data:orders})
+         } catch (error) {
+           res.json({success:false,message:"error"})
+         }
    }
 
-   export{placeOrder,verifyOrder,userOrders,listOders};
+   // api for updating order status
+
+   const updateStatus=async(req,res)=>{
+       try {
+          await orderModel.findByIdAndUpdate(req.body.orderId,{status:req.body.status});
+          res.json({success:true,message:"Status Updated"})
+       } catch (error) {
+          console.log(error);
+          res.json({success:false,message:"Error"})
+            
+       }
+   }
+
+   export{placeOrder,verifyOrder,userOrders,listOders,updateStatus};
