@@ -78,4 +78,6 @@ const stripe =new Stripe(process.env.STRIPE_SECRET_KEY)
    }
    }
 
+   //user orders for front end
+
    export{placeOrder,verifyOrder};
